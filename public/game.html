@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+    crossorigin="anonymous"
+  />
+</head>
+<body class="game-body">
+    <div class="modal">
+        <div class="modal-content" id="err-content">
+            <h1 class="warning">Error:</h1>
+            <p class="warning-message">You can't enter because someone has the same name as you in this room. Please leave and join with a different name</p>
+            <a href="index.html"><button class="go-back">Go Back</button></a> 
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-content" id="chat">
+            <button class="close-modal">x</button>
+            <div id="real-chat">
+                <div class="messages">
+                </div>
+                <div class="chat-form-container">
+                    <form action="" id="chat-form">
+                        <input type="text" id="msg" placeholder="Enter message...." required >
+                        <button type="submit" id="chat-submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+  
+
+        </div>
+    </div>
+    <header class="game-header">
+        <h1>Game</h1>
+        <a href="index.html"><button class="leave">Leave</button></a>
+    </header>
+
+    
+    <main class="game-main">
+        <div class="sidebar">
+            <h3><i class="fas fa-users"></i> Users</h3>
+            <ul id="users">
+            </ul>
+            <div id="whose-turn">
+                <h4>Game has not started yet</h4>
+            </div>
+        </div>
+
+        <div class="board">
+            <div class="special-modal" id="result-modal">
+                <div class="special-modal-content">
+                    <h1>Results</h1>
+                    <table id="results">
+                    </table>
+                    <div class="player-result-info">
+                    </div>
+                </div>
+            </div>
+            <div class="suit">
+                <div id="KS-spot" class="card-spot"></div>
+                <div id="QS-spot" class="card-spot"></div>
+                <div id="JS-spot" class="card-spot"></div>
+                <div id="10S-spot" class="card-spot"></div>
+                <div id="9S-spot" class="card-spot show"></div>
+                <div id="8S-spot" class="card-spot show"></div>
+                <div id="7S-spot" class="card-spot seven"></div>
+                <div id="6S-spot" class= "card-spot show"></div>
+                <div id="5S-spot" class="card-spot show"></div>
+                <div id="4S-spot" class="card-spot"></div>
+                <div id="3S-spot" class="card-spot"></div>
+                <div id="2S-spot" class="card-spot"></div>
+                <div id="AS-spot" class="card-spot"></div>
+            </div>
+            <div class="suit">
+                <div id="KH-spot" class="card-spot"></div>
+                <div id="QH-spot" class="card-spot"></div>
+                <div id="JH-spot" class="card-spot"></div>
+                <div id="10H-spot" class="card-spot"></div>
+                <div id="9H-spot" class="card-spot show"></div>
+                <div id="8H-spot" class="card-spot show"></div>
+                <div id="7H-spot" class="card-spot seven"></div>
+                <div id="6H-spot" class= "card-spot show"></div>
+                <div id="5H-spot" class="card-spot show"></div>
+                <div id="4H-spot" class="card-spot"></div>
+                <div id="3H-spot" class="card-spot"></div>
+                <div id="2H-spot" class="card-spot"></div>
+                <div id="AH-spot" class="card-spot"></div>
+            </div>
+            <div class="suit">
+                <div id="KD-spot" class="card-spot"></div>
+                <div id="QD-spot" class="card-spot"></div>
+                <div id="JD-spot" class="card-spot"></div>
+                <div id="10D-spot" class="card-spot"></div>
+                <div id="9D-spot" class="card-spot show"></div>
+                <div id="8D-spot" class="card-spot show"></div>
+                <div id="7D-spot" class="card-spot seven"></div>
+                <div id="6D-spot" class= "card-spot show"></div>
+                <div id="5D-spot" class="card-spot show"></div>
+                <div id="4D-spot" class="card-spot"></div>
+                <div id="3D-spot" class="card-spot"></div>
+                <div id="2D-spot" class="card-spot"></div>
+                <div id="AD-spot" class="card-spot"></div>
+            </div>
+            <div class="suit">
+                <div id="KC-spot" class="card-spot"></div>
+                <div id="QC-spot" class="card-spot"></div>
+                <div id="JC-spot" class="card-spot"></div>
+                <div id="10C-spot" class="card-spot"></div>
+                <div id="9C-spot" class="card-spot show"></div>
+                <div id="8C-spot" class="card-spot show"></div>
+                <div id="7C-spot" class="card-spot seven"></div>
+                <div id="6C-spot" class= "card-spot show"></div>
+                <div id="5C-spot" class="card-spot show"></div>
+                <div id="4C-spot" class="card-spot"></div>
+                <div id="3C-spot" class="card-spot"></div>
+                <div id="2C-spot" class="card-spot"></div>
+                <div id="AC-spot" class="card-spot"></div>
+            </div>
+        </main>
+        </div>
+    <div class="user-interface">
+        <header class="user-interface-header">
+            <h4>Your Cards</h4>
+            <div id="button-menu">
+                <button class="btn" id="choose-card">Choose Card</button>
+                <button class="btn" id="flip-card-btn">Flip Card</button>
+                <button class="btn" id="start">Start Game</button>
+                <button id="chat-start"><i class="fas fa-comments"></i><span class="chat-notify">0</span></button>
+            </div>
+
+
+        </header>
+        <div class="error">
+            Error: Not enough players to start the game. You must have at least two.
+        </div>
+        <div class="user-cards-container">
+            <div class="user-cards">
+            </div>
+        
+        </div>
+        <div class="flipped-container">
+            <h4>Flipped Cards</h4>
+            <div class="flipped">
+            </div>
+        </div>
+    </div>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+    integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+    crossorigin="anonymous"
+  ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

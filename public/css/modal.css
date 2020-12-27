@@ -1,0 +1,76 @@
+:root{
+    --modal-duration: 1s;
+}
+
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.8)
+}
+.special-modal{
+    display: none;
+    position: absolute;
+    height: 480px;
+    z-index: 1;
+    overflow: auto;
+    background: rgba(0,0,0,0.8);
+}
+.modal-content {
+    background: #fff;
+    
+    margin:10% auto;
+    width: 350px;
+    border-radius: 10px;
+    padding: 3rem;
+    box-shadow: 0 5px 8px rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+
+}
+.special-modal-content {
+    background: #fff; 
+    margin:10% auto;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 3rem;
+    box-shadow: 0 5px 8px rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+
+}
+#err-content{
+    text-align: center;
+}
+
+.warning{
+    margin-bottom: 1rem;
+    color: red;
+    text-transform: uppercase;
+}
+
+.warning-message{
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+.go-back{
+    background-color: #333;
+    color: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+@keyframes modalopen {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}

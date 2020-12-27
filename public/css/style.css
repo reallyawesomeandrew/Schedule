@@ -1,0 +1,204 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.game-body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../images/Wood.jpeg");
+    background-size: 100% 100%;
+}
+* {
+    padding: 0px;
+}
+.form-container{
+    width: 380px;
+    height: 380px;
+    margin: 9rem auto;
+    background-color: papayawhip;
+    border-radius: 20px;
+    padding: 20px;
+}
+.form-header{
+    text-align: center;
+}
+.username-container{
+    margin-bottom: 2rem;
+}
+#username-input{
+    width: 100%;
+    margin-top: 1rem;
+}
+input[type="text"]{
+    padding: 0.3rem;
+}
+#submit{
+    width: 100%;
+    background-color: #333;
+    color: white;
+}
+/* Game */
+.error{
+    color: white;
+    background-color: darkred;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px white dashed;
+    display: none;
+    margin: 1rem auto;
+}
+.game-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leave{
+    width: 75px;
+    height: 25px;
+}
+
+.game-main{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+#users{
+    list-style: none;
+}
+#users li{
+    font-size: 20px;
+    margin: 5px;
+}
+.sidebar{
+    border: 1px solid black;
+    margin-right: 5px;
+    padding: 5px;
+}
+#whose-turn{
+    font-size: 20px;
+}
+.board{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    height: 480px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 1px black solid;
+    background-color: green;
+}
+.card-spot,
+.card{
+    height: 114px;
+    width: 75px;
+    margin: 5px;
+}
+.card-spot{
+    border-radius: 5px;
+    border: 1px dashed black;
+    border-style: dashed;
+    margin: 5px auto;
+    display: none;
+}
+.seven{
+    display: block;
+}
+.user-interface-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#button-menu{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#flip-card-btn{
+    display: none;
+}
+.btn{
+    width: 90px;
+    height: 40px;
+    background-color: #333;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+}
+.show{
+    display: block !important;
+}
+#choose-card{
+    display: none;
+}
+.chat-notify{
+    color: white;
+    background-color: red;
+    padding: 3px;
+    font-size: 15px;
+    border-radius: 4px;
+    display: none;
+}
+#chat-start{
+    background-color: transparent;
+    border: 0px;
+    font-size: 30px;
+    color: white;
+}
+
+.user-cards{
+    white-space: nowrap;
+    overflow-x: scroll;
+    height: 140px;
+    border: 1px solid;
+    background-color: green;
+}
+.flipped{
+    overflow-x: scroll;
+    height: 140px;
+    border: 1px solid;
+    background-color: green;
+}
+.card{
+    display: inline-block;
+}
+.small-card{
+    height: 57px;
+    width: 37.5px;
+    background-image: url("../Playing_Cards/7S.png");
+    background-size: 37.5px 57px;
+}
+/* Chat */
+#chat{
+    height: 320px;
+    padding: 1rem;
+    padding-bottom: 2.3rem;
+}
+#chat-form{
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+.close-modal{
+    background-color: red;
+    width: 19px;
+    border-radius: 50%;
+    border: 0px;
+    padding: 3px;
+    position: absolute;
+}
+#real-chat{
+    margin: 20px;
+}
+.messages{
+    overflow: scroll;
+    height: 300px;
+    border: 1px solid black;
+}
+
+.message{
+    background-color: lightgray;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 1rem;
+}
+.meta{
+    margin-top: 0px;
+    color: blue;
+}
+.text{
+    margin-bottom: 0px;
+}
