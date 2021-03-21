@@ -66,13 +66,11 @@ function findAvailable(board){
     var suitsCheck = [["S"], ["H"], ["D"], ["C"]]
     board.forEach(suit => {
         suitsCheck.forEach(suitList => {;
-            // console.log(suitList[0])
             if(suitList[0] == suit.charAt(suit.length - 1)){
                 suitList.push(suit)
             }
         })
     })
-    console.log(suitsCheck)
     suitsCheck.forEach(suitList => {
         if(suitList.length == 1){
             output.push("7" + suitList[0])
@@ -81,11 +79,8 @@ function findAvailable(board){
             var biggest = 7;
             suitList.forEach(card => {
                 if(card.length > 1){
-                    console.log("card: " + card);
                     var firstValue = card.slice(0, -1);
-                    console.log("first Value: " + firstValue);
                     var value = isNaN(parseInt(firstValue, 10)) ? suitValues[firstValue]: parseInt(firstValue, 10);
-                    console.log("value: " + value)
                     if(value < smallest){
                         smallest = value;
                     }
@@ -96,15 +91,11 @@ function findAvailable(board){
 
             })
             if(smallest != 1){
-                console.log("smallest: " + smallest);
                 var avaCard = smallest - 1 == 1 ? "A":  (smallest-1).toString(10);
-                console.log("new card: " + avaCard )
                 output.push(avaCard + suitList[0])
             }
             if(biggest != 13){
-                console.log("biggest: " + biggest);
                 var avaCard = biggest + 1 > 10 ? reverseSuitValues[biggest+1]: (biggest + 1).toString(10);
-                console.log("new card: " + avaCard)
                 output.push(avaCard + suitList[0])
             }
         }
@@ -204,9 +195,7 @@ io.on('connection', socket => {
         userNum ++;
         currentUser = users[userNum % users.length];
         currentBoard.push(card);
-        console.log(currentBoard)
         var available = findAvailable(currentBoard);
-        console.log(available);
         io.emit("whoseTurn", {user: currentUser, available: available});
     })
     socket.on("flip", (username) => {
@@ -217,7 +206,6 @@ io.on('connection', socket => {
         io.emit("whoseTurn", {user: currentUser, available: available});
     })
     socket.on("gameEnd", () => {
-        console.log("game end");
         io.emit("getFlipped")
     })
     socket.on("flippedCards", ({username, flipped}) => {

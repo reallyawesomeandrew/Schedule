@@ -4,8 +4,6 @@ const start = document.getElementById("start");
 const startError = document.querySelector(".error");
 const userCardsList = document.querySelector(".user-cards");
 const error = document.querySelector(".error");
-const chooseCard = document.getElementById("choose-card");
-const flipBtn = document.getElementById("flip-card-btn")
 const whoseTurn = document.getElementById("whose-turn");
 const board = document.querySelector(".board");
 const modal = document.querySelector(".modal");
@@ -37,18 +35,16 @@ function outputUsers(users){
 function cardProcess(e){
     card = e.target.id;
     socket.emit("goChangeBoard",card);
-    chooseCard.style.display = "block";
     window.myCards.splice(window.myCards.findIndex((cardy) => {
         return cardy == card;
     }), 1);
     document.getElementById(card).parentElement.removeChild(document.getElementById(card))
     window.myCards.forEach(card => {
-        document.getElementById(card).style.display = "inline-block";
+        document.getElementById(card).style.opacity = "1";
     })
     e.target.removeEventListener("click", cardProcess)
 }
 function flipCardProcess(e){
-    console.log("hi");
     card = e.target.id;
     window.myCards.splice(window.myCards.findIndex((cardy) => {
         return cardy == card;
@@ -65,7 +61,6 @@ function flipCardProcess(e){
     window.myCards.forEach(card => {
         document.getElementById(card).removeEventListener("click", flipCardProcess, { once: true})
     })
-    flipBtn.style.display = "none";
 
 }
 const socket = io();
@@ -88,7 +83,6 @@ socket.on("onePlayer", (e) => {
 
 start.addEventListener("click", (e) =>  {
     socket.emit("start")
-    console.log("game is starting");
 })
 chatButton.addEventListener("click", (e) => {
     chatModal.style.display = "block";
@@ -120,7 +114,6 @@ chatForm.addEventListener("submit", (e) =>{
 // })
 socket.on("yourCards", cards => {
     start.style.display = "none";
-    chooseCard.style.display = "block";
     window.myCards = cards;
     var S = [];
     var H = [];
@@ -139,7 +132,6 @@ socket.on("yourCards", cards => {
         }
     })
     var sortedList = S.concat(H.concat(D.concat(C)));
-    console.log(sortedList)
     sortedList.forEach(card => {
         var cardElement = document.createElement("div");
         cardElement.id = card;
@@ -159,43 +151,33 @@ socket.on("whoseTurn", ({ user,available })  => {
     socket.on("roomUsers", ({ users })  => {
         outputUsers(users);
     })
-    chooseCard.style.display = "block";
     if(user.username == username){
-        console.log(window.myCards)
         if(window.myCards.length == 0){
-            console.log("empty myCards")
             socket.emit("gameEnd")
         }
         whoseTurn.innerHTML = "<h4>Your Turn</h4>";
         alreadyChosen = false;
-        chooseCard.addEventListener("click", (e) => {
-                chooseCard.style.display = "none";
-                var hasCard = false;
-                window.myCards.forEach(card => {
-                    if(available.includes(card) == false){
-                        document.getElementById(card).style.display = "none";
-                    }else{
-                        hasCard = true
-                        flipBtn.style.display = "none";
-                        document.getElementById(card).style.display = "inline-block";
-                        document.getElementById(card).addEventListener("dragend", cardProcess)
-                    }
-                    
-            
-                })
-                if (hasCard == false) {
-                    flipBtn.style.display = "block";
-                    chooseCard.style.display = "none";
-                    window.myCards.forEach(card => {
-                        document.getElementById(card).style.display = "inline-block";
-                        document.getElementById(card).addEventListener("click", flipCardProcess, { once: true})
-                    })
-
+        var hasCard = false;
+        window.myCards.forEach(card => {
+            if(available.includes(card) == false){
+                document.getElementById(card).style.opacity = "0.5";
+            }else{
+                hasCard = true
+                document.getElementById(card).style.display = "inline-block";
+                document.getElementById(card).addEventListener("dragend", cardProcess)
             }
-        }, {once: true})
+            
+    
+        })
+        if (hasCard == false) {
+            window.myCards.forEach(card => {
+                document.getElementById(card).style.display = "inline-block";
+                document.getElementById(card).addEventListener("click", flipCardProcess, { once: true})
+            })
+
+    }
     }else{
         whoseTurn.innerHTML = `<h4>${user.username}'s Turn</h4>`
-        chooseCard.style.display = "none";
     }
 
 })
@@ -222,7 +204,6 @@ socket.on("realFlipCard", (user) => {
     })
 })
 socket.on("getFlipped", () => {
-   console.log("in flipped");
    window.myCards = [];
    resultModal.style.display = "block";
    var flipped = document.querySelectorAll(".flip-card");
@@ -271,7 +252,6 @@ socket.on("realChatMessage", ({user, msg, time}) => {
 socket.on("end", () => {
     window.myCards = [];
     userCardsList.innerHTML = "";
-    chooseCard.style.display = "none";
     start.style.display = "block";
     whoseTurn.innerHTML = "<h3>Game has not started yet</h3>"
     document.querySelectorAll(".card-spot").forEach(card => card.style.display = "none");
